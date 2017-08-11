@@ -2,6 +2,8 @@ FROM buildpack-deps:xenial
 
 RUN apt-get update \
 	&& apt-get install -y \
+		libogg-dev \
+		libvorbis-dev \
 		libflac-dev \
 		libboost-all-dev \
 		libsndfile1-dev \
