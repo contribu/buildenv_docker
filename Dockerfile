@@ -17,4 +17,6 @@ RUN apt-get update \
 		&& make -j `nproc` \
 		&& make install \
 	) \
+	&& mkdir -p ~/.ssh \
+	&& ssh-keyscan -H bitbucket.org >> ~/.ssh/known_hosts \
 	&& rm -rf /tmp/*
