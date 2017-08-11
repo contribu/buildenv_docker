@@ -20,4 +20,6 @@ RUN apt-get update \
 	) \
 	&& mkdir -p ~/.ssh \
 	&& ssh-keyscan -H bitbucket.org >> ~/.ssh/known_hosts \
+	&& git config --global user.email "you@example.com" \
+	&& git config --global user.name "Your Name" \
 	&& rm -rf /tmp/*
