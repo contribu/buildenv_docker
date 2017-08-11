@@ -5,6 +5,7 @@ RUN apt-get update \
 		libflac-dev \
 		libboost-all-dev \
 		libsndfile1-dev \
+		libgflags-dev \
 		cmake \
 		git \
 		wget \
