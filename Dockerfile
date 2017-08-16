@@ -18,10 +18,10 @@ RUN apt-get update \
 		ffmpeg \
 		ruby2.4 \
 		postgresql \
-		postgresql-contrib \
 		redis-server \
 		vim \
-	&& ( \
+	&& rm -rf /var/lib/apt/lists/*
+RUN ( \
 		cd /tmp \
 		&& wget ftp://ftp.fftw.org/pub/fftw/fftw-3.3.4.tar.gz \
 		&& tar xfvz fftw-3.3.4.tar.gz \
@@ -37,7 +37,5 @@ RUN apt-get update \
 		&& git config --global user.name "Your Name" \
 	) \
 	&& gem install bundler \
-	&& ( \
-		echo 'local all postgres trust' > /etc/postgresql/9.5/main/pg_hba.conf \
-	) \
+	&& echo 'local all postgres trust' > /etc/postgresql/9.5/main/pg_hba.conf \
 	&& rm -rf /tmp/*
