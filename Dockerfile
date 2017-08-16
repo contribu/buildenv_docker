@@ -17,6 +17,7 @@ RUN apt-get update \
 		wget \
 		ffmpeg \
 		ruby2.4 \
+		ruby2.4-dev \
 		postgresql \
 		redis-server \
 		vim \
