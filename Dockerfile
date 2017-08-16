@@ -1,6 +1,10 @@
 FROM buildpack-deps:trusty
 
 RUN apt-get update \
+	&& apt-get -y install software-properties-common \
+	&& add-apt-repository -y ppa:mc3man/trusty-media \
+	&& add-apt-repository -y ppa:brightbox/ruby-ng \
+	&& apt-get update \
 	&& apt-get install -y \
 		libogg-dev \
 		libvorbis-dev \
@@ -11,6 +15,8 @@ RUN apt-get update \
 		cmake \
 		git \
 		wget \
+		ffmpeg \
+		ruby2.4 \
 	&& ( \
 		cd /tmp \
 		&& wget ftp://ftp.fftw.org/pub/fftw/fftw-3.3.4.tar.gz \
@@ -24,4 +30,5 @@ RUN apt-get update \
 	&& ssh-keyscan -H bitbucket.org >> ~/.ssh/known_hosts \
 	&& git config --global user.email "you@example.com" \
 	&& git config --global user.name "Your Name" \
+	&& gem install bundler \
 	&& rm -rf /tmp/*
