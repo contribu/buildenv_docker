@@ -20,8 +20,8 @@ RUN apt-get update \
 		postgresql \
 		redis-server \
 		vim \
-	&& rm -rf /var/lib/apt/lists/*
-RUN ( \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& ( \
 		cd /tmp \
 		&& wget ftp://ftp.fftw.org/pub/fftw/fftw-3.3.4.tar.gz \
 		&& tar xfvz fftw-3.3.4.tar.gz \
@@ -30,12 +30,14 @@ RUN ( \
 		&& make -j `nproc` \
 		&& make install \
 	) \
-	&& ( \
+	&& rm -rf /tmp/*
+
+RUN ( \
 		mkdir -p ~/.ssh \
 		&& ssh-keyscan -H bitbucket.org >> ~/.ssh/known_hosts \
 		&& git config --global user.email "you@example.com" \
 		&& git config --global user.name "Your Name" \
 	) \
 	&& gem install bundler \
-	&& echo 'local all postgres trust' > /etc/postgresql/9.5/main/pg_hba.conf \
+	&& echo 'local all postgres trust' > /etc/postgresql/9.3/main/pg_hba.conf \
 	&& rm -rf /tmp/*
