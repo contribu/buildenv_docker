@@ -17,6 +17,10 @@ RUN apt-get update \
 		wget \
 		ffmpeg \
 		ruby2.4 \
+		postgresql \
+		postgresql-contrib \
+		redis-server \
+		vim \
 	&& ( \
 		cd /tmp \
 		&& wget ftp://ftp.fftw.org/pub/fftw/fftw-3.3.4.tar.gz \
@@ -26,9 +30,14 @@ RUN apt-get update \
 		&& make -j `nproc` \
 		&& make install \
 	) \
-	&& mkdir -p ~/.ssh \
-	&& ssh-keyscan -H bitbucket.org >> ~/.ssh/known_hosts \
-	&& git config --global user.email "you@example.com" \
-	&& git config --global user.name "Your Name" \
+	&& ( \
+		mkdir -p ~/.ssh \
+		&& ssh-keyscan -H bitbucket.org >> ~/.ssh/known_hosts \
+		&& git config --global user.email "you@example.com" \
+		&& git config --global user.name "Your Name" \
+	) \
 	&& gem install bundler \
+	&& ( \
+		echo 'local all postgres trust' > /etc/postgresql/9.5/main/pg_hba.conf \
+	) \
 	&& rm -rf /tmp/*
