@@ -3,6 +3,7 @@ FROM buildpack-deps:trusty
 SHELL ["/bin/bash", "-c"]
 
 RUN apt-get update \
+	&& curl -sL https://deb.nodesource.com/setup_8.x | bash \
 	&& apt-get -y install software-properties-common \
 	&& add-apt-repository -y ppa:mc3man/trusty-media \
 	&& add-apt-repository -y ppa:brightbox/ruby-ng \
@@ -23,6 +24,7 @@ RUN apt-get update \
 		postgresql \
 		redis-server \
 		vim \
+		nodejs \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& ( \
 		cd /tmp \
@@ -32,13 +34,6 @@ RUN apt-get update \
 		&& ./configure --enable-float --enable-sse --enable-sse2 --enable-avx \
 		&& make -j `nproc` \
 		&& make install \
-	) \
-	&& ( \
-		curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash \
-		&& export NVM_DIR="$HOME/.nvm" \
-		&& [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
-		&& [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" \
-		&& nvm install v8.2.1 \
 	) \
 	&& rm -rf /tmp/*
 
