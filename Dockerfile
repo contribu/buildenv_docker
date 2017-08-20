@@ -44,5 +44,11 @@ RUN ( \
 		&& git config --global user.name "Your Name" \
 	) \
 	&& gem install bundler \
-	&& echo 'local all postgres trust' > /etc/postgresql/9.3/main/pg_hba.conf \
+	&& ( \
+		echo 'local all postgres trust' > /etc/postgresql/9.3/main/pg_hba.conf \
+		&& echo "fix postgresql and docker bug by https://gitter.im/bgruening/docker-galaxy-stable/archives/2017/03/09" \
+		&& cp /etc/ssl/private/ssl-cert-snakeoil.key /etc/ \
+		&& chown root:ssl-cert /etc/ssl-cert-snakeoil.key \
+		&& sed -i -e "s/\/ssl\/private//g" /etc/postgresql/9.3/main/postgresql.conf \
+	) \
 	&& rm -rf /tmp/*
