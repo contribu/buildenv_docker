@@ -34,6 +34,10 @@ RUN apt-get update \
 		&& mv /tmp/docker/* /usr/bin \
 	) \
 	&& ( \
+		curl -L https://github.com/docker/compose/releases/download/1.16.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose \
+		&& chmod +x /usr/local/bin/docker-compose \
+	) \
+	&& ( \
 		cd /tmp \
 		&& wget ftp://ftp.fftw.org/pub/fftw/fftw-3.3.4.tar.gz \
 		&& tar xfvz fftw-3.3.4.tar.gz \
