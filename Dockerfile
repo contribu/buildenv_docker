@@ -5,21 +5,12 @@ SHELL ["/bin/bash", "-c"]
 RUN apt-get update \
 	&& curl -sL https://deb.nodesource.com/setup_8.x | bash \
 	&& apt-get install -y \
-		apt-transport-https \
-		ca-certificates \
-		curl \
 		software-properties-common \
-	&& curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - \
-	&& add-apt-repository \
-		"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-		$(lsb_release -cs) \
-		stable" \
 	&& add-apt-repository -y ppa:mc3man/trusty-media \
 	&& add-apt-repository -y ppa:brightbox/ruby-ng \
 	&& apt-get update \
 	&& apt-get install -y \
 		cmake \
-		docker-ce \
 		ffmpeg \
 		git \
 		libogg-dev \
@@ -28,8 +19,6 @@ RUN apt-get update \
 		libboost-all-dev \
 		libsndfile1-dev \
 		libgflags-dev \
-		linux-image-extra-$(uname -r) \
-		linux-image-extra-virtual \
 		nodejs \
 		postgresql \
 		redis-server \
@@ -38,6 +27,12 @@ RUN apt-get update \
 		vim \
 		wget \
 	&& rm -rf /var/lib/apt/lists/* \
+	&& ( \
+		VER="17.03.0-ce" \
+		&& curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz \
+		&& tar -xz -C /tmp -f /tmp/docker-$VER.tgz \
+		&& mv /tmp/docker/* /usr/bin \
+	) \
 	&& ( \
 		cd /tmp \
 		&& wget ftp://ftp.fftw.org/pub/fftw/fftw-3.3.4.tar.gz \
