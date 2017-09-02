@@ -4,27 +4,39 @@ SHELL ["/bin/bash", "-c"]
 
 RUN apt-get update \
 	&& curl -sL https://deb.nodesource.com/setup_8.x | bash \
-	&& apt-get -y install software-properties-common \
+	&& apt-get install -y \
+		apt-transport-https \
+		ca-certificates \
+		curl \
+		software-properties-common \
+	&& curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - \
+	&& add-apt-repository \
+		"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+		$(lsb_release -cs) \
+		stable" \
 	&& add-apt-repository -y ppa:mc3man/trusty-media \
 	&& add-apt-repository -y ppa:brightbox/ruby-ng \
 	&& apt-get update \
 	&& apt-get install -y \
+		cmake \
+		docker-ce \
+		ffmpeg \
+		git \
 		libogg-dev \
 		libvorbis-dev \
 		libflac-dev \
 		libboost-all-dev \
 		libsndfile1-dev \
 		libgflags-dev \
-		cmake \
-		git \
-		wget \
-		ffmpeg \
-		ruby2.4 \
-		ruby2.4-dev \
+		linux-image-extra-$(uname -r) \
+		linux-image-extra-virtual \
+		nodejs \
 		postgresql \
 		redis-server \
+		ruby2.4 \
+		ruby2.4-dev \
 		vim \
-		nodejs \
+		wget \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& ( \
 		cd /tmp \
