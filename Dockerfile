@@ -64,4 +64,5 @@ RUN ( \
 		&& chown root:ssl-cert /etc/ssl-cert-snakeoil.key \
 		&& sed -i -e "s/\/ssl\/private//g" /etc/postgresql/9.3/main/postgresql.conf \
 	) \
+	&& sed -i -e 's/SHOWWARNING=true//g' /etc/tmpreaper.conf \
 	&& rm -rf /tmp/*
