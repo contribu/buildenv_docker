@@ -24,6 +24,7 @@ RUN apt-get update \
 		redis-server \
 		ruby2.4 \
 		ruby2.4-dev \
+		tmpreaper \
 		valgrind \
 		vim \
 		wget \
