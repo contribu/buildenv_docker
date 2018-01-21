@@ -44,7 +44,9 @@ RUN apt-get update \
 		&& wget ftp://ftp.fftw.org/pub/fftw/fftw-3.3.4.tar.gz \
 		&& tar xfvz fftw-3.3.4.tar.gz \
 		&& cd fftw-3.3.4 \
-		&& ./configure --enable-float --enable-sse --enable-sse2 --enable-avx \
+		&& echo "configure options: http://www.fftw.org/fftw3_doc/Installation-on-Unix.html" \
+		&& echo "compiler support needed but cpu support is not needed" \
+		&& ./configure --enable-float --enable-sse --enable-sse2 --enable-avx --enable-avx2 --enable-avx-128-fma \
 		&& make -j `nproc` \
 		&& make install \
 	) \
