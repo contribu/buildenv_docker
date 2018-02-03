@@ -66,6 +66,8 @@ RUN ( \
     && git config --global user.email "you@example.com" \
     && git config --global user.name "Your Name" \
   ) \
+  && echo 'install: --no-ri --no-rdoc' >> /root/.gemrc \
+  && echo 'update: --no-ri --no-rdoc' >> /root/.gemrc \
   && gem install bundler \
   && ( \
     echo 'local all postgres trust' > /etc/postgresql/9.3/main/pg_hba.conf \
