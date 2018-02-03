@@ -32,7 +32,7 @@ RUN apt-get update \
     wget \
   && rm -rf /var/lib/apt/lists/* \
   && ( \
-    VER="17.03.0-ce" \
+    VER="17.12.0-ce" \
     && curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz \
     && tar -xz -C /tmp -f /tmp/docker-$VER.tgz \
     && mv /tmp/docker/* /usr/bin \
@@ -42,10 +42,11 @@ RUN apt-get update \
     && chmod +x /usr/local/bin/docker-compose \
   ) \
   && ( \
-    cd /tmp \
-    && wget ftp://ftp.fftw.org/pub/fftw/fftw-3.3.4.tar.gz \
-    && tar xfvz fftw-3.3.4.tar.gz \
-    && cd fftw-3.3.4 \
+    VER="3.3.7" \
+    && cd /tmp \
+    && wget ftp://ftp.fftw.org/pub/fftw/fftw-${VER}.tar.gz \
+    && tar xfvz fftw-${VER}.tar.gz \
+    && cd fftw-${VER} \
     && echo "configure options: http://www.fftw.org/fftw3_doc/Installation-on-Unix.html" \
     && echo "compiler support needed but cpu support is not needed" \
     && ./configure --enable-float --enable-sse --enable-sse2 --enable-avx --enable-avx2 --enable-avx-128-fma \
