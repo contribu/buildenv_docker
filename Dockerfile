@@ -2,6 +2,8 @@ FROM buildpack-deps:trusty
 
 SHELL ["/bin/bash", "-c"]
 
+ENV PATH /root/google-cloud-sdk/bin:$PATH
+
 RUN apt-get update \
   && curl -sL https://deb.nodesource.com/setup_8.x | bash \
   && apt-get install -y \
@@ -56,7 +58,6 @@ RUN apt-get update \
     && tar xfvz google-cloud-sdk-180.0.0-linux-x86_64.tar.gz \
     && mv google-cloud-sdk /root/google-cloud-sdk \
     && /root/google-cloud-sdk/install.sh --quiet \
-    && echo source /root/google-cloud-sdk/path.bash.inc >> /root/.bashrc \
   ) \
   && rm -rf /tmp/*
 
