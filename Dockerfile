@@ -56,7 +56,7 @@ RUN apt-get update \
     && tar xfvz google-cloud-sdk-180.0.0-linux-x86_64.tar.gz \
     && mv google-cloud-sdk /root/google-cloud-sdk \
     && /root/google-cloud-sdk/install.sh --quiet \
-    && echo source google-cloud-sdk/path.bash.inc >> /root/.bashrc \
+    && echo source /root/google-cloud-sdk/path.bash.inc >> /root/.bashrc \
   ) \
   && rm -rf /tmp/*
 
