@@ -55,7 +55,7 @@ RUN apt-get update \
     && make clean \
     && ./configure --enable-sse --enable-sse2 --enable-avx --enable-avx2 --enable-avx-128-fma \
     && make -j `nproc` \
-    && make install
+    && make install \
   ) \
   && ( \
     cd /tmp \
