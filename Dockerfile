@@ -43,7 +43,7 @@ RUN apt-get update \
     curl -L https://github.com/docker/compose/releases/download/1.16.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose \
     && chmod +x /usr/local/bin/docker-compose \
   ) \
-  && curl -L https://gist.githubusercontent.com/contribu/8a572edaccb86ae749449a3fec83ce5f/raw/50341c043df0ace2b981a95dcedac30eeb3112bd/install_ffmpeg_supporting_openh264.sh | bash \
+  && curl -L https://gist.githubusercontent.com/contribu/8a572edaccb86ae749449a3fec83ce5f/raw/b62f87104a31108a44c610708ecc5c5ff30b6621/install_ffmpeg_supporting_openh264.sh | bash \
   && ( \
     VER="3.3.7" \
     && cd /tmp \
