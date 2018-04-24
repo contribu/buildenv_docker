@@ -13,7 +13,6 @@ RUN apt-get update \
   && apt-get update \
   && apt-get install -y \
     cmake \
-    ffmpeg \
     git \
     libogg-dev \
     libvorbis-dev \
@@ -41,6 +40,7 @@ RUN apt-get update \
     curl -L https://github.com/docker/compose/releases/download/1.16.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose \
     && chmod +x /usr/local/bin/docker-compose \
   ) \
+  && curl -L https://gist.githubusercontent.com/contribu/8a572edaccb86ae749449a3fec83ce5f/raw/0acccdcee87e14567ae62284e0db23e3f49cf771/install_ffmpeg_supporting_openh264.sh | bash \
   && ( \
     VER="3.3.7" \
     && cd /tmp \
