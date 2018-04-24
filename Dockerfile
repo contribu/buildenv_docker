@@ -17,6 +17,9 @@ RUN apt-get update \
     libogg-dev \
     libvorbis-dev \
     libflac-dev \
+    libmp3lame-dev \
+    libopus-dev \
+    libvpx-dev \
     libboost-all-dev \
     libsndfile1-dev \
     libgflags-dev \
@@ -40,7 +43,7 @@ RUN apt-get update \
     curl -L https://github.com/docker/compose/releases/download/1.16.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose \
     && chmod +x /usr/local/bin/docker-compose \
   ) \
-  && curl -L https://gist.githubusercontent.com/contribu/8a572edaccb86ae749449a3fec83ce5f/raw/d3f8b755b48dc65c6de2ed90553582b1fd4984bb/install_ffmpeg_supporting_openh264.sh | bash \
+  && curl -L https://gist.githubusercontent.com/contribu/8a572edaccb86ae749449a3fec83ce5f/raw/50341c043df0ace2b981a95dcedac30eeb3112bd/install_ffmpeg_supporting_openh264.sh | bash \
   && ( \
     VER="3.3.7" \
     && cd /tmp \
