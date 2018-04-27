@@ -14,15 +14,16 @@ RUN apt-get update \
   && apt-get install -y \
     cmake \
     git \
-    libogg-dev \
-    libvorbis-dev \
-    libflac-dev \
-    libmp3lame-dev \
-    libopus-dev \
-    libvpx-dev \
     libboost-all-dev \
-    libsndfile1-dev \
+    libflac-dev \
     libgflags-dev \
+    libmp3lame-dev \
+    libogg-dev \
+    libopus-dev \
+    libsndfile1-dev \
+    libvorbis-dev \
+    libvpx-dev \
+    nasm \
     nodejs \
     postgresql \
     redis-server \
@@ -32,6 +33,7 @@ RUN apt-get update \
     valgrind \
     vim \
     wget \
+    yasm \
   && rm -rf /var/lib/apt/lists/* \
   && ( \
     VER="17.03.0-ce" \
@@ -43,7 +45,7 @@ RUN apt-get update \
     curl -L https://github.com/docker/compose/releases/download/1.16.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose \
     && chmod +x /usr/local/bin/docker-compose \
   ) \
-  && curl -L https://gist.githubusercontent.com/contribu/8a572edaccb86ae749449a3fec83ce5f/raw/b62f87104a31108a44c610708ecc5c5ff30b6621/install_ffmpeg_supporting_openh264.sh | bash \
+  && curl -L https://gist.githubusercontent.com/contribu/8a572edaccb86ae749449a3fec83ce5f/raw/d90b011686e79e8072a5df06673b2b0abc646d94/install_ffmpeg_supporting_openh264.sh | bash \
   && ( \
     VER="3.3.7" \
     && cd /tmp \
