@@ -2,7 +2,7 @@ FROM buildpack-deps:trusty
 
 SHELL ["/bin/bash", "-c"]
 
-ENV PATH /root/google-cloud-sdk/bin:$PATH
+ENV PATH /root/.pyenv/bin:/root/google-cloud-sdk/bin:$PATH
 
 RUN apt-get update \
   && curl -sL https://deb.nodesource.com/setup_8.x | bash \
@@ -68,6 +68,13 @@ RUN apt-get update \
     && tar xfvz google-cloud-sdk-180.0.0-linux-x86_64.tar.gz \
     && mv google-cloud-sdk /root/google-cloud-sdk \
     && /root/google-cloud-sdk/install.sh --quiet \
+  ) \
+  && ( \
+    curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/eceeb9b82a1f8de7ce7bf65a14f5ac149102ad9e/bin/pyenv-installer | bash \
+    && eval "$(pyenv init -)" \
+    && pyenv install 3.6.5 \
+    && pyenv shell 3.6.5 \
+    && pip install pipenv \
   ) \
   && rm -rf /tmp/*
 
