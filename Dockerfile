@@ -3,6 +3,8 @@ FROM buildpack-deps:trusty
 SHELL ["/bin/bash", "-c"]
 
 ENV PATH /root/.pyenv/bin:/root/google-cloud-sdk/bin:$PATH
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
 
 RUN apt-get update \
   && curl -sL https://deb.nodesource.com/setup_8.x | bash \
