@@ -31,6 +31,7 @@ RUN apt-get update \
     redis-server \
     ruby2.4 \
     ruby2.4-dev \
+    time \
     tmpreaper \
     valgrind \
     vim \
