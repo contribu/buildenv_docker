@@ -23,6 +23,7 @@ RUN apt-get update \
     libogg-dev \
     libopus-dev \
     libsndfile1-dev \
+    libtag1-dev \
     libvorbis-dev \
     libvpx-dev \
     nasm \
