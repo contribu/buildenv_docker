@@ -8,6 +8,7 @@ ENV LANG=C.UTF-8
 
 RUN apt-get update \
   && curl -sL https://deb.nodesource.com/setup_8.x | bash \
+  && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
   && apt-get install -y \
     software-properties-common \
   && add-apt-repository -y ppa:mc3man/trusty-media \
@@ -16,6 +17,7 @@ RUN apt-get update \
   && apt-get install -y \
     cmake \
     git \
+    git-lfs \
     libboost-all-dev \
     libflac-dev \
     libgflags-dev \
@@ -39,6 +41,7 @@ RUN apt-get update \
     wget \
     yasm \
   && rm -rf /var/lib/apt/lists/* \
+  && git lfs install \
   && ( \
     VER="17.03.0-ce" \
     && curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz \
