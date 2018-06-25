@@ -83,6 +83,12 @@ RUN apt-get update \
     && pyenv shell 3.6.5 \
     && pip install pipenv \
   ) \
+  && ( \
+    cd $(mktemp -d) \
+    && wget https://github.com/gohugoio/hugo/releases/download/v0.42.1/hugo_0.42.1_Linux-64bit.tar.gz \
+    && tar -zxvf hugo_0.42.1_Linux-64bit.tar.gz \
+    && mv hugo /usr/bin/ \
+  ) \
   && rm -rf /tmp/*
 
 RUN ( \
