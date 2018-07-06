@@ -75,6 +75,7 @@ RUN apt-get update \
     && tar xfvz google-cloud-sdk-180.0.0-linux-x86_64.tar.gz \
     && mv google-cloud-sdk /root/google-cloud-sdk \
     && /root/google-cloud-sdk/install.sh --quiet \
+    && gcloud config set component_manager/disable_update_check true \
   ) \
   && ( \
     curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/eceeb9b82a1f8de7ce7bf65a14f5ac149102ad9e/bin/pyenv-installer | bash \
