@@ -90,6 +90,13 @@ RUN apt-get update \
     && tar -zxvf hugo_0.42.1_Linux-64bit.tar.gz \
     && mv hugo /usr/bin/ \
   ) \
+  && ( \
+    cd $(mktemp -d) \
+    && wget https://acousticbrainz.org/static/download/abzsubmit-0.1-linux-x86_64.tar.gz \
+    && tar -zxvf  abzsubmit-0.1-linux-x86_64.tar.gz \
+    && cd abzsubmit-0.1 \
+    && mv streaming_extractor_music /usr/bin/ \
+  ) \
   && rm -rf /tmp/*
 
 RUN ( \
