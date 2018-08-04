@@ -7,7 +7,7 @@ ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
 RUN apt-get update \
-  && curl -sL https://deb.nodesource.com/setup_8.x | bash \
+  && curl -sL https://deb.nodesource.com/setup_10.x | bash \
   && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
   && apt-get install -y \
     software-properties-common \
