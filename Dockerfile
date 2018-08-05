@@ -18,9 +18,11 @@ RUN apt-get update \
     cmake \
     git \
     git-lfs \
+    imagemagick \
     libboost-all-dev \
     libflac-dev \
     libgflags-dev \
+    libmagick++-dev \
     libmp3lame-dev \
     libogg-dev \
     libopus-dev \
