@@ -18,6 +18,7 @@ RUN apt-get update \
     cmake \
     git \
     git-lfs \
+    gsfonts \
     imagemagick \
     libboost-all-dev \
     libflac-dev \
