@@ -41,8 +41,10 @@ RUN apt-get update \
     tmpreaper \
     valgrind \
     vim \
+    unzip \
     wget \
     yasm \
+    zip \
   && rm -rf /var/lib/apt/lists/* \
   && git lfs install \
   && ( \
@@ -99,6 +101,15 @@ RUN apt-get update \
     && tar -zxvf  abzsubmit-0.1-linux-x86_64.tar.gz \
     && cd abzsubmit-0.1 \
     && mv streaming_extractor_music /usr/bin/ \
+  ) \
+  && ( \
+    echo https://www.google.com/get/noto/help/install/ \
+    && cd $(mktemp -d) \
+    && wget https://noto-website-2.storage.googleapis.com/pkgs/NotoSans-hinted.zip \
+    && unzip NotoSans-hinted.zip -d ./noto \
+    && mkdir -p /usr/share/fonts/opentype/noto \
+    && cp noto/* /usr/share/fonts/opentype/noto \
+    && fc-cache -f -v \
   ) \
   && rm -rf /tmp/*
 
