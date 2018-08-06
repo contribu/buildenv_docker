@@ -102,15 +102,6 @@ RUN apt-get update \
     && cd abzsubmit-0.1 \
     && mv streaming_extractor_music /usr/bin/ \
   ) \
-  && ( \
-    echo https://www.google.com/get/noto/help/install/ \
-    && cd $(mktemp -d) \
-    && wget https://noto-website-2.storage.googleapis.com/pkgs/NotoSans-hinted.zip \
-    && unzip NotoSans-hinted.zip -d ./noto \
-    && mkdir -p /usr/share/fonts/opentype/noto \
-    && cp noto/* /usr/share/fonts/opentype/noto \
-    && fc-cache -f -v \
-  ) \
   && rm -rf /tmp/*
 
 RUN ( \
