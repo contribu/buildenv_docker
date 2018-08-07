@@ -41,6 +41,7 @@ RUN apt-get update \
     tmpreaper \
     valgrind \
     vim \
+    unifont \
     unzip \
     wget \
     yasm \
