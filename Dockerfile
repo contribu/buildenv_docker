@@ -35,8 +35,8 @@ RUN apt-get update \
     nodejs \
     postgresql \
     redis-server \
-    ruby2.4 \
-    ruby2.4-dev \
+    ruby2.5 \
+    ruby2.5-dev \
     time \
     tmpreaper \
     valgrind \
