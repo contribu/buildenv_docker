@@ -33,6 +33,8 @@ RUN apt-get update \
     libvpx-dev \
     nasm \
     nodejs \
+    optipng \
+    pngquant \
     postgresql \
     redis-server \
     ruby2.5 \
