@@ -121,7 +121,7 @@ RUN ( \
     && echo "fix postgresql and docker bug by https://gitter.im/bgruening/docker-galaxy-stable/archives/2017/03/09" \
     && cp /etc/ssl/private/ssl-cert-snakeoil.key /etc/ \
     && chown root:ssl-cert /etc/ssl-cert-snakeoil.key \
-    && sed -i -e "s/\/ssl\/private//g" /etc/postgresql/9.3/main/postgresql.conf \
+    && sed -i -e 's@/ssl/private@@g' /etc/postgresql/9.3/main/postgresql.conf \
   ) \
   && sed -i -e 's/SHOWWARNING=true//g' /etc/tmpreaper.conf \
   && sed -i -e 's/^#cron/cron.* /var/log/cron.log/g' /etc/rsyslog.d/50-default.conf \
