@@ -27,6 +27,7 @@ RUN apt-get update \
     libmp3lame-dev \
     libogg-dev \
     libopus-dev \
+    libpoco-dev \
     libsndfile1-dev \
     libtag1-dev \
     libvorbis-dev \
