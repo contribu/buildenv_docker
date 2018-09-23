@@ -13,6 +13,7 @@ RUN apt-get update \
     software-properties-common \
   && add-apt-repository -y ppa:mc3man/trusty-media \
   && add-apt-repository -y ppa:brightbox/ruby-ng \
+  && sudo add-apt-repository ppa:george-edison55/cmake-3.x \
   && apt-get update \
   && apt-get install -y \
     cmake \
