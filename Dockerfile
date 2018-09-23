@@ -47,10 +47,10 @@ RUN apt-get update \
     vim \
     unifont \
     unzip \
+    upx \
     wget \
     yasm \
     zip \
-  && rm -rf /var/lib/apt/lists/* \
   && git lfs install \
   && ( \
     VER="17.03.0-ce" \
@@ -62,7 +62,9 @@ RUN apt-get update \
     curl -L https://github.com/docker/compose/releases/download/1.16.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose \
     && chmod +x /usr/local/bin/docker-compose \
   ) \
-  && curl -L https://gist.githubusercontent.com/contribu/8a572edaccb86ae749449a3fec83ce5f/raw/d90b011686e79e8072a5df06673b2b0abc646d94/install_ffmpeg_supporting_openh264.sh | bash \
+  && ( \
+    (curl -L https://gist.githubusercontent.com/contribu/8a572edaccb86ae749449a3fec83ce5f/raw/d90b011686e79e8072a5df06673b2b0abc646d94/install_ffmpeg_supporting_openh264.sh | bash) \
+  ) \
   && ( \
     VER="3.3.7" \
     && cd $(mktemp -d) \
@@ -107,7 +109,34 @@ RUN apt-get update \
     && cd abzsubmit-0.1 \
     && mv streaming_extractor_music /usr/bin/ \
   ) \
-  && rm -rf /tmp/*
+  && ( \
+    echo 'remove large unused files' \
+    && rm -rf \
+      /usr/local/libav* \
+      $(which ffserver) \
+  ) \
+  && ( \
+    echo 'upx large binaries' \
+    echo 'TODO /usr/lib/valgrind ' \
+    && upx \
+      $(which docker) \
+      $(which dockerd) \
+      $(which ffmpeg) \
+      $(which ffprobe) \
+      $(which fftw-wisdom) \
+      $(which fftwf-wisdom) \
+      $(which git-lfs) \
+      $(which hugo) \
+      $(which node) \
+      $(which python2.7) \
+      $(which python3.4) \
+      $(which streaming_extractor_music) \
+      /usr/lib/gcc/x86_64-linux-gnu/4.8/cc1 \
+      /usr/lib/gcc/x86_64-linux-gnu/4.8/cc1plus \
+  ) \
+  && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /tmp/* \
+  && rm -rf /var/tmp/*
 
 RUN ( \
     mkdir -p ~/.ssh \
@@ -127,4 +156,5 @@ RUN ( \
   ) \
   && sed -i -e 's/SHOWWARNING=true//g' /etc/tmpreaper.conf \
   && sed -i -e 's@^#cron@cron@g' /etc/rsyslog.d/50-default.conf \
-  && rm -rf /tmp/*
+  && rm -rf /tmp/* \
+  && rm -rf /var/tmp/*
