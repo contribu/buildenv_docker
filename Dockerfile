@@ -13,10 +13,8 @@ RUN apt-get update \
     software-properties-common \
   && add-apt-repository -y ppa:mc3man/trusty-media \
   && add-apt-repository -y ppa:brightbox/ruby-ng \
-  && sudo add-apt-repository ppa:george-edison55/cmake-3.x \
   && apt-get update \
   && apt-get install -y \
-    cmake \
     git \
     git-lfs \
     gsfonts \
@@ -52,6 +50,15 @@ RUN apt-get update \
     yasm \
     zip \
   && git lfs install \
+  && ( \
+    cd $(mktemp -d) \
+    && wget https://cmake.org/files/v3.12/cmake-3.12.2.tar.gz \
+    && tar xfvz cmake-3.12.2.tar.gz \
+    && cd cmake-3.12.2 \
+    && ./bootstrap -- -DCMAKE_BUILD_TYPE:STRING=Release \
+    && make -j `nproc` \
+    && make install \
+  ) \
   && ( \
     VER="17.03.0-ce" \
     && curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz \
