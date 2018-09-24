@@ -126,6 +126,10 @@ RUN apt-get update \
     echo 'upx large binaries' \
     echo 'TODO /usr/lib/valgrind ' \
     && upx \
+      $(which ccmake) \
+      $(which cmake) \
+      $(which ctest) \
+      $(which cpack) \
       $(which docker) \
       $(which dockerd) \
       $(which ffmpeg) \
