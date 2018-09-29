@@ -29,6 +29,7 @@ RUN apt-get update \
     libpoco-dev \
     libsndfile1-dev \
     libtag1-dev \
+    libtbb-dev \
     libvorbis-dev \
     libvpx-dev \
     nasm \
