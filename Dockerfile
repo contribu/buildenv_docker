@@ -19,7 +19,6 @@ RUN apt-get update \
     git-lfs \
     gsfonts \
     imagemagick \
-    libboost-all-dev \
     libflac-dev \
     libgflags-dev \
     libmagick++-dev \
@@ -42,7 +41,6 @@ RUN apt-get update \
     ruby2.5-dev \
     time \
     tmpreaper \
-    valgrind \
     vim \
     unifont \
     unzip \
