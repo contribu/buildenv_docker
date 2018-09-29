@@ -13,11 +13,8 @@ RUN apt-get update \
     software-properties-common \
   && add-apt-repository -y ppa:mc3man/trusty-media \
   && add-apt-repository -y ppa:brightbox/ruby-ng \
-  && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
   && apt-get update \
   && apt-get install -y \
-    g++-7 \
-    gcc-7 \
     git \
     git-lfs \
     gsfonts \
@@ -51,8 +48,6 @@ RUN apt-get update \
     wget \
     yasm \
     zip \
-  && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7 \
-  && update-alternatives --config gcc \
   && git lfs install \
   && ( \
     cd $(mktemp -d) \
@@ -145,6 +140,8 @@ RUN apt-get update \
       $(which python2.7) \
       $(which python3.4) \
       $(which streaming_extractor_music) \
+      /usr/lib/gcc/x86_64-linux-gnu/4.8/cc1 \
+      /usr/lib/gcc/x86_64-linux-gnu/4.8/cc1plus \
   ) \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /tmp/* \
