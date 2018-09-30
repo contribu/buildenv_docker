@@ -11,9 +11,11 @@ RUN apt-get update \
   && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
   && apt-get install -y \
     software-properties-common \
+  && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
   && add-apt-repository -y ppa:mc3man/trusty-media \
   && add-apt-repository -y ppa:brightbox/ruby-ng \
   && apt-get update \
+  && apt-get upgrade -y \
   && apt-get install -y \
     git \
     git-lfs \
