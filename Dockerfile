@@ -19,6 +19,7 @@ RUN apt-get update \
   && apt-get install -y \
     git \
     git-lfs \
+    gnuplot \
     gsfonts \
     imagemagick \
     libflac-dev \
