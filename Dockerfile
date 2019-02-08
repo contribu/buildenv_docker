@@ -14,6 +14,7 @@ RUN apt-get update \
   && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
   && add-apt-repository -y ppa:mc3man/trusty-media \
   && add-apt-repository -y ppa:brightbox/ruby-ng \
+  && add-apt-repository ppa:git-core/ppa \
   && apt-get update \
   && apt-get upgrade -y \
   && apt-get install -y \
