@@ -8,9 +8,16 @@ ENV LANG=C.UTF-8
 
 RUN ( \
     cd $(mktemp -d) \
-    git clone -b gcc.amd64  https://github.com/cloudflare/zlib.git \
+    git clone -b gcc.amd64 https://github.com/cloudflare/zlib.git \
     cd zlib \
     ./configure \
+    make -j 4 \
+    make install \
+  ) && ( \
+    cd $(mktemp -d) \
+    git clone -b libpng16 https://github.com/glennrp/libpng.git \
+    cd libpng \
+    ./configure --enable-hardware-optimizations=yes \
     make -j 4 \
     make install \
   ) && apt-get update \
