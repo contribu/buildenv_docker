@@ -43,6 +43,7 @@ RUN apt-get update \
     redis-server \
     ruby2.5 \
     ruby2.5-dev \
+    sox \
     time \
     tmpreaper \
     vim \
