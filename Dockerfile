@@ -6,7 +6,14 @@ ENV PATH /root/.pyenv/bin:/root/google-cloud-sdk/bin:$PATH
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
-RUN apt-get update \
+RUN ( \
+    cd $(mktemp -d) \
+    git clone -b gcc.amd64  https://github.com/cloudflare/zlib.git \
+    cd zlib \
+    ./configure \
+    make -j 4 \
+    make install \
+  ) && apt-get update \
   && curl -sL https://deb.nodesource.com/setup_10.x | bash \
   && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
   && apt-get install -y \
