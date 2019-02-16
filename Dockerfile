@@ -143,7 +143,7 @@ RUN ( \
   ) \
   && ( \
     echo 'upx large binaries' \
-    && upx \
+    && upx --best \
       $(which ccmake) \
       $(which cmake) \
       $(which ctest) \
