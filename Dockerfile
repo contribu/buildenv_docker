@@ -162,7 +162,7 @@ RUN ( \
       $(which streaming_extractor_music) \
       /usr/lib/gcc/x86_64-linux-gnu/4.8/cc1 \
       /usr/lib/gcc/x86_64-linux-gnu/4.8/cc1plus \
-      | xargs -n 1 -P $(nproc) upx --best \
+      | xargs -n 1 -P $(nproc) upx --lzma \
   ) \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /tmp/* \
