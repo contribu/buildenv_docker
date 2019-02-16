@@ -64,6 +64,7 @@ RUN apt-get update \
     ruby2.5 \
     ruby2.5-dev \
     sox \
+    sudo \
     time \
     tmpreaper \
     vim \
