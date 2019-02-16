@@ -30,10 +30,6 @@ RUN ( \
     && make install \
   ) \
   && curl -sL https://deb.nodesource.com/setup_10.x | bash \
-  && apt-get install -y \
-    software-properties-common \
-  && add-apt-repository -y ppa:brightbox/ruby-ng \
-  && add-apt-repository ppa:git-core/ppa \
   && apt-get update \
   && apt-get upgrade -y \
   && apt-get install -y \
@@ -60,8 +56,8 @@ RUN ( \
     pngquant \
     postgresql \
     redis-server \
-    ruby2.5 \
-    ruby2.5-dev \
+    ruby \
+    ruby-dev \
     sox \
     sudo \
     time \
