@@ -1,4 +1,4 @@
-FROM buildpack-deps:bionic
+FROM buildpack-deps:cosmic
 
 SHELL ["/bin/bash", "-c"]
 
@@ -175,9 +175,9 @@ RUN ( \
       $(which streaming_extractor_music) \
       /usr/bin/git \
       /usr/lib/git-core/git \
-      /usr/lib/gcc/x86_64-linux-gnu/7/cc1 \
-      /usr/lib/gcc/x86_64-linux-gnu/7/cc1plus \
-      /usr/lib/gcc/x86_64-linux-gnu/7/lto1 \
+      /usr/lib/gcc/x86_64-linux-gnu/8/cc1 \
+      /usr/lib/gcc/x86_64-linux-gnu/8/cc1plus \
+      /usr/lib/gcc/x86_64-linux-gnu/8/lto1 \
       | xargs -n 1 -P $(nproc) upx --lzma \
   ) \
   && rm -rf /var/lib/apt/lists/* \
