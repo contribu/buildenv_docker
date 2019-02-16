@@ -64,11 +64,17 @@ RUN ( \
     vim \
     unifont \
     unzip \
-    upx \
     wget \
     yasm \
     zip \
   && git lfs install \
+  && ( \
+    echo latest upx is needed for cosmic \
+    cd $(mktemp -d) \
+    && wget https://github.com/upx/upx/releases/download/v3.95/upx-3.95-amd64_linux.tar.xz \
+    && tar xfv upx-3.95-amd64_linux.tar.xz \
+    && mv upx-3.95-amd64_linux/upx /usr/bin \
+  ) \
   && ( \
     cd $(mktemp -d) \
     && wget https://cmake.org/files/v3.12/cmake-3.12.2.tar.gz \
