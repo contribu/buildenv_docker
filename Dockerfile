@@ -5,6 +5,7 @@ SHELL ["/bin/bash", "-c"]
 ENV PATH /root/.pyenv/bin:/root/google-cloud-sdk/bin:$PATH
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
+ENV LIBRARY_PATH /usr/local/lib:$LIBRARY_PATH
 
 RUN ( \
     cd $(mktemp -d) \
