@@ -143,7 +143,7 @@ RUN ( \
   ) \
   && ( \
     echo 'upx large binaries' \
-    && upx --best \
+    && echo \
       $(which ccmake) \
       $(which cmake) \
       $(which ctest) \
@@ -162,6 +162,7 @@ RUN ( \
       $(which streaming_extractor_music) \
       /usr/lib/gcc/x86_64-linux-gnu/4.8/cc1 \
       /usr/lib/gcc/x86_64-linux-gnu/4.8/cc1plus \
+      | xargs -n 1 -P $(nproc) upx --best \
   ) \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /tmp/* \
