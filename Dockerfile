@@ -183,6 +183,7 @@ RUN apt-get update \
       /usr/lib/gcc/x86_64-linux-gnu/8/cc1 \
       /usr/lib/gcc/x86_64-linux-gnu/8/cc1plus \
       /usr/lib/gcc/x86_64-linux-gnu/8/lto1 \
+      /usr/lib/llvm-6.0/bin/clang \
       | xargs -n 1 -P $(nproc) upx --lzma \
   ) \
   && rm -rf /var/lib/apt/lists/* \
