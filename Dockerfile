@@ -30,10 +30,8 @@ RUN ( \
     && make install \
   ) \
   && curl -sL https://deb.nodesource.com/setup_10.x | bash \
-  && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
   && apt-get install -y \
     software-properties-common \
-  && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
   && add-apt-repository -y ppa:brightbox/ruby-ng \
   && add-apt-repository ppa:git-core/ppa \
   && apt-get update \
