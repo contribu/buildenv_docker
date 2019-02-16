@@ -10,7 +10,7 @@ ENV LIBRARY_PATH /usr/local/lib:$LIBRARY_PATH
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-  && apt-get install gcc-8 g++-8 \
+  && apt-get install -y gcc-8 g++-8 \
   && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7 \
   && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8 \
   && ( \
