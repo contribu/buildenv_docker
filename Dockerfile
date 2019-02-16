@@ -203,6 +203,5 @@ RUN ( \
     && sed -i -e 's@/ssl/private@@g' /etc/postgresql/10/main/postgresql.conf \
   ) \
   && sed -i -e 's/SHOWWARNING=true//g' /etc/tmpreaper.conf \
-  && sed -i -e 's@^#cron@cron@g' /etc/rsyslog.d/50-default.conf \
   && rm -rf /tmp/* \
   && rm -rf /var/tmp/*
