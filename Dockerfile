@@ -1,4 +1,4 @@
-FROM buildpack-deps:trusty
+FROM buildpack-deps:bionic
 
 SHELL ["/bin/bash", "-c"]
 
@@ -27,7 +27,6 @@ RUN ( \
   && apt-get install -y \
     software-properties-common \
   && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
-  && add-apt-repository -y ppa:mc3man/trusty-media \
   && add-apt-repository -y ppa:brightbox/ruby-ng \
   && add-apt-repository ppa:git-core/ppa \
   && apt-get update \
