@@ -9,7 +9,11 @@ ENV LIBRARY_PATH /usr/local/lib:$LIBRARY_PATH
 # https://qiita.com/yagince/items/deba267f789604643bab
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN ( \
+RUN apt-get update \
+  && apt-get install gcc-8 g++-8 \
+  && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7 \
+  && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8 \
+  && ( \
     cd $(mktemp -d) \
     && git clone -b gcc.amd64 https://github.com/cloudflare/zlib.git \
     && cd zlib \
@@ -23,7 +27,7 @@ RUN ( \
     && ./configure --enable-hardware-optimizations=yes \
     && make -j 4 \
     && make install \
-  ) && apt-get update \
+  ) \
   && curl -sL https://deb.nodesource.com/setup_10.x | bash \
   && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
   && apt-get install -y \
