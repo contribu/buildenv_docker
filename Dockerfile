@@ -196,11 +196,11 @@ RUN ( \
   && echo 'update: --no-ri --no-rdoc' >> /root/.gemrc \
   && gem install bundler \
   && ( \
-    echo 'local all postgres trust' > /etc/postgresql/9.3/main/pg_hba.conf \
+    echo 'local all postgres trust' > /etc/postgresql/10/main/pg_hba.conf \
     && echo "fix postgresql and docker bug by https://gitter.im/bgruening/docker-galaxy-stable/archives/2017/03/09" \
     && cp /etc/ssl/private/ssl-cert-snakeoil.key /etc/ \
     && chown root:ssl-cert /etc/ssl-cert-snakeoil.key \
-    && sed -i -e 's@/ssl/private@@g' /etc/postgresql/9.3/main/postgresql.conf \
+    && sed -i -e 's@/ssl/private@@g' /etc/postgresql/10/main/postgresql.conf \
   ) \
   && sed -i -e 's/SHOWWARNING=true//g' /etc/tmpreaper.conf \
   && sed -i -e 's@^#cron@cron@g' /etc/rsyslog.d/50-default.conf \
