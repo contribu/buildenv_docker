@@ -9,14 +9,12 @@ ENV LIBRARY_PATH /usr/local/lib:$LIBRARY_PATH
 # https://qiita.com/yagince/items/deba267f789604643bab
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update \
-  && apt-get install -y \
-    clang \
-    g++-8 \
-    gcc-8 \
-  && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7 \
-  && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8 \
-  && ( \
+# do not install gcc8
+# https://webcache.googleusercontent.com/search?q=cache:7NrehphZe0oJ:https://askubuntu.com/questions/1061670/failed-to-update-system-or-install-any-program-on-ubuntu-18-04-too-many-levels+&cd=1&hl=ja&ct=clnk&gl=jp
+# dpkg: error processing package libboost-mpi-python1.65.1 (--configure):
+# install non default compiler just before build in circleci
+
+RUN ( \
     cd $(mktemp -d) \
     && git clone -b gcc.amd64 https://github.com/cloudflare/zlib.git \
     && cd zlib \
@@ -180,10 +178,6 @@ RUN apt-get update \
       /usr/lib/gcc/x86_64-linux-gnu/7/cc1 \
       /usr/lib/gcc/x86_64-linux-gnu/7/cc1plus \
       /usr/lib/gcc/x86_64-linux-gnu/7/lto1 \
-      /usr/lib/gcc/x86_64-linux-gnu/8/cc1 \
-      /usr/lib/gcc/x86_64-linux-gnu/8/cc1plus \
-      /usr/lib/gcc/x86_64-linux-gnu/8/lto1 \
-      /usr/lib/llvm-6.0/bin/clang \
       | xargs -n 1 -P $(nproc) upx --lzma \
   ) \
   && rm -rf /var/lib/apt/lists/* \
