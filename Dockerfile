@@ -116,8 +116,8 @@ RUN ( \
   ) \
   && ( \
     cd $(mktemp -d) \
-    && wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-180.0.0-linux-x86_64.tar.gz \
-    && tar xfvz google-cloud-sdk-180.0.0-linux-x86_64.tar.gz \
+    && wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-225.0.0-linux-x86_64.tar.gz \
+    && tar xfvz google-cloud-sdk-225.0.0-linux-x86_64.tar.gz \
     && mv google-cloud-sdk /root/google-cloud-sdk \
     && /root/google-cloud-sdk/install.sh --quiet \
     && gcloud config set component_manager/disable_update_check true \
