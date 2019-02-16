@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: docker build
+          command: |
+            docker build -t build .
+      - deploy:
+          name: deploy
+          command: |
+            set -u
+
+            DOCKER_TAG=$DOCKER_USER/buildenv_docker:$CIRCLE_BRANCH
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker tag build $DOCKER_TAG
+            docker push $DOCKER_TAG
+
+            if [ "$CIRCLE_BRANCH" == "master" ]; then
+              DOCKER_TAG_LATEST=$DOCKER_USER/buildenv_docker:latest
+              docker tag build $DOCKER_TAG_LATEST
+              docker push $DOCKER_TAG_LATEST
+            fi
