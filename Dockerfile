@@ -92,7 +92,7 @@ RUN ( \
     (curl -L https://gist.githubusercontent.com/contribu/8a572edaccb86ae749449a3fec83ce5f/raw/d90b011686e79e8072a5df06673b2b0abc646d94/install_ffmpeg_supporting_openh264.sh | bash) \
   ) \
   && ( \
-    VER="3.3.7" \
+    VER="3.3.8" \
     && cd $(mktemp -d) \
     && wget ftp://ftp.fftw.org/pub/fftw/fftw-${VER}.tar.gz \
     && tar xfvz fftw-${VER}.tar.gz \
