@@ -155,7 +155,7 @@ RUN ( \
       $(which ffserver) \
   ) \
   && ( \
-    echo 'upx large binaries' \
+    echo 'upx large binaries (excluding used frequently)' \
     && echo \
       $(which ccmake) \
       $(which cmake) \
@@ -163,8 +163,6 @@ RUN ( \
       $(which cpack) \
       $(which docker) \
       $(which dockerd) \
-      $(which ffmpeg) \
-      $(which ffprobe) \
       $(which fftw-wisdom) \
       $(which fftwf-wisdom) \
       $(which git-lfs) \
