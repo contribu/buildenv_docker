@@ -47,7 +47,6 @@ RUN ( \
     libpoco-dev \
     libsndfile1-dev \
     libtag1-dev \
-    libtbb-dev \
     libvorbis-dev \
     libvpx-dev \
     nasm \
@@ -69,6 +68,14 @@ RUN ( \
     yasm \
     zip \
   && git lfs install \
+  && ( \
+    cd $(mktemp -d) \
+    && wget https://github.com/01org/tbb/releases/download/2019_U3/tbb2019_20181203oss_lin.tgz \
+    && tar -xzvf tbb2019_20181203oss_lin.tgz \
+    && cd tbb2019_20181203oss \
+    && mv lib/intel64/gcc4.7/* /usr/local/lib \
+    && mv include/* /usr/local/include
+  ) \
   && ( \
     echo latest upx is needed for cosmic \
     cd $(mktemp -d) \
