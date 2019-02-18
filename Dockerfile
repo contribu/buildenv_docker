@@ -88,7 +88,7 @@ RUN ( \
     && tar xfvz cmake-3.12.2.tar.gz \
     && cd cmake-3.12.2 \
     && ./bootstrap -- -DCMAKE_BUILD_TYPE:STRING=Release \
-    && make -j `nproc` \
+    && make -j 4 \
     && make install \
   ) \
   && ( \
@@ -113,11 +113,11 @@ RUN ( \
     && echo "configure options: http://www.fftw.org/fftw3_doc/Installation-on-Unix.html" \
     && echo "compiler support needed but cpu support is not needed" \
     && ./configure --enable-float --enable-sse --enable-sse2 --enable-avx --enable-avx2 --enable-avx-128-fma \
-    && make -j `nproc` \
+    && make -j 4 \
     && make install \
     && make clean \
     && ./configure --enable-sse2 --enable-avx --enable-avx2 --enable-avx-128-fma \
-    && make -j `nproc` \
+    && make -j 4 \
     && make install \
   ) \
   && ( \
@@ -175,7 +175,7 @@ RUN ( \
       $(which streaming_extractor_music) \
       /usr/lib/gcc/x86_64-linux-gnu/4.8/cc1 \
       /usr/lib/gcc/x86_64-linux-gnu/4.8/cc1plus \
-      | xargs -n 1 -P $(nproc) upx --lzma \
+      | xargs -n 1 -P 4 upx --lzma \
   ) \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /tmp/* \
