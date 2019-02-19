@@ -39,6 +39,7 @@ RUN ( \
   && apt-get update \
   && apt-get upgrade -y \
   && apt-get install -y \
+    build-essential \
     git \
     git-lfs \
     gnuplot \
@@ -56,6 +57,7 @@ RUN ( \
     libvorbis-dev \
     libvpx-dev \
     nasm \
+    netcat \
     nodejs \
     optipng \
     pngquant \
