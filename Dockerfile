@@ -55,6 +55,7 @@ RUN ( \
     netcat \
     nodejs \
     optipng \
+    p7zip-full \
     pngquant \
     postgresql \
     redis-server \
