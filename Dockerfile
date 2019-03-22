@@ -89,9 +89,9 @@ RUN ( \
   ) \
   && ( \
     cd $(mktemp -d) \
-    && wget https://cmake.org/files/v3.12/cmake-3.12.2.tar.gz \
-    && tar xfvz cmake-3.12.2.tar.gz \
-    && cd cmake-3.12.2 \
+    && wget https://github.com/Kitware/CMake/releases/download/v3.14.0/cmake-3.14.0.tar.gz \
+    && tar xfvz cmake-3.14.0.tar.gz \
+    && cd cmake-3.14.0 \
     && ./bootstrap -- -DCMAKE_BUILD_TYPE:STRING=Release \
     && make -j 4 \
     && make install \
