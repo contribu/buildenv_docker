@@ -59,8 +59,6 @@ RUN ( \
     pngquant \
     postgresql \
     redis-server \
-    ruby \
-    ruby-dev \
     sox \
     sudo \
     time \
@@ -141,6 +139,16 @@ RUN ( \
     && pip install pipenv \
   ) \
   && ( \
+    git clone --single-branch --depth 1 https://github.com/rbenv/rbenv.git /root/.rbenv \
+    && (cd ~/.rbenv && src/configure && make -C src) \
+    && git clone --single-branch --depth 1 https://github.com/sstephenson/ruby-build.git /root/.rbenv/plugins/ruby-build \
+    && echo 'export PATH="/root/.rbenv/bin:${PATH}"' >> /etc/profile.d/rbenv.sh \
+    && echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh \
+    && (source /etc/profile.d/rbenv.sh && rbenv install 2.6.2 && rbenv global 2.6.2) \
+    && echo 'install: --no-document' >> /root/.gemrc \
+    && echo 'update: --no-document' >> /root/.gemrc \
+  ) \
+  && ( \
     cd $(mktemp -d) \
     && wget https://github.com/gohugoio/hugo/releases/download/v0.42.1/hugo_0.42.1_Linux-64bit.tar.gz \
     && tar -zxvf hugo_0.42.1_Linux-64bit.tar.gz \
@@ -194,9 +202,6 @@ RUN ( \
     && git config --global user.name "Your Name" \
     && git config --global core.longpaths true \
   ) \
-  && echo 'install: --no-ri --no-rdoc' >> /root/.gemrc \
-  && echo 'update: --no-ri --no-rdoc' >> /root/.gemrc \
-  && gem install bundler \
   && ( \
     echo 'local all postgres trust' > /etc/postgresql/10/main/pg_hba.conf \
     && echo "fix postgresql and docker bug by https://gitter.im/bgruening/docker-galaxy-stable/archives/2017/03/09" \
