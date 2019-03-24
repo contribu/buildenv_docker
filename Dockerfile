@@ -2,7 +2,7 @@ FROM buildpack-deps:cosmic
 
 SHELL ["/bin/bash", "-c"]
 
-ENV PATH /root/.pyenv/bin:/root/google-cloud-sdk/bin:$PATH
+ENV PATH /root/.rbenv/shims:/root/.rbenv/bin:/root/.pyenv/bin:/root/google-cloud-sdk/bin:$PATH
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 ENV LIBRARY_PATH /usr/local/lib:$LIBRARY_PATH
@@ -142,9 +142,8 @@ RUN ( \
     git clone --single-branch --depth 1 https://github.com/rbenv/rbenv.git /root/.rbenv \
     && (cd ~/.rbenv && src/configure && make -C src) \
     && git clone --single-branch --depth 1 https://github.com/sstephenson/ruby-build.git /root/.rbenv/plugins/ruby-build \
-    && echo 'export PATH="/root/.rbenv/bin:${PATH}"' >> /etc/profile.d/rbenv.sh \
-    && echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh \
-    && (source /etc/profile.d/rbenv.sh && rbenv install 2.6.2 && rbenv global 2.6.2) \
+    && rbenv install 2.6.2 && rbenv global 2.6.2 \
+    && rbenv rehash \
     && echo 'install: --no-document' >> /root/.gemrc \
     && echo 'update: --no-document' >> /root/.gemrc \
   ) \
