@@ -10,7 +10,14 @@ jobs:
       - run:
           name: docker build
           command: |
-            docker build -t build .
+            docker pull $DOCKER_USER/buildenv_docker:$CIRCLE_BRANCH || echo 'previous docker image not exists'
+            docker build -t build --cache-from $DOCKER_USER/buildenv_docker:$CIRCLE_BRANCH .
+      - run:
+          name: test
+          command: |
+            docker run -it --rm build ruby --version
+            docker run -it --rm build gem --version
+            docker run -it --rm build bundle --version
       - deploy:
           name: deploy
           command: |
