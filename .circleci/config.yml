@@ -26,3 +26,7 @@ jobs:
               docker tag build $DOCKER_TAG_LATEST
               docker push $DOCKER_TAG_LATEST
             fi
+
+            curl --user "$BUILDENV_LARGE_CIRCLECI_API_TOKEN" \
+              --data build_parameters[CIRCLE_JOB]=build \
+                https://circleci.com/api/v1.1/project/github/contribu/buildenv_large/tree/"$CIRCLE_BRANCH"
