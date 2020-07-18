@@ -2,7 +2,7 @@ FROM buildpack-deps:bionic
 
 SHELL ["/bin/bash", "-c"]
 
-ENV PATH /root/.pyenv/bin:/root/google-cloud-sdk/bin:$PATH
+ENV PATH /root/.rbenv/shims:/root/.rbenv/bin:/root/.pyenv/bin:/root/google-cloud-sdk/bin:$PATH
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 ENV LIBRARY_PATH /usr/local/lib:$LIBRARY_PATH
@@ -45,6 +45,7 @@ RUN ( \
     gnuplot \
     gsfonts \
     imagemagick \
+    libarmadillo9 \
     libflac-dev \
     libgflags-dev \
     libmagick++-dev \
@@ -60,11 +61,10 @@ RUN ( \
     netcat \
     nodejs \
     optipng \
+    p7zip-full \
     pngquant \
     postgresql \
     redis-server \
-    ruby2.5 \
-    ruby2.5-dev \
     sox \
     sudo \
     time \
@@ -93,9 +93,9 @@ RUN ( \
   ) \
   && ( \
     cd $(mktemp -d) \
-    && wget https://cmake.org/files/v3.12/cmake-3.12.2.tar.gz \
-    && tar xfvz cmake-3.12.2.tar.gz \
-    && cd cmake-3.12.2 \
+    && wget https://github.com/Kitware/CMake/releases/download/v3.14.0/cmake-3.14.0.tar.gz \
+    && tar xfvz cmake-3.14.0.tar.gz \
+    && cd cmake-3.14.0 \
     && ./bootstrap -- -DCMAKE_BUILD_TYPE:STRING=Release \
     && make -j 4 \
     && make install \
@@ -131,8 +131,8 @@ RUN ( \
   ) \
   && ( \
     cd $(mktemp -d) \
-    && wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-180.0.0-linux-x86_64.tar.gz \
-    && tar xfvz google-cloud-sdk-180.0.0-linux-x86_64.tar.gz \
+    && wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-225.0.0-linux-x86_64.tar.gz \
+    && tar xfvz google-cloud-sdk-225.0.0-linux-x86_64.tar.gz \
     && mv google-cloud-sdk /root/google-cloud-sdk \
     && /root/google-cloud-sdk/install.sh --quiet \
     && gcloud config set component_manager/disable_update_check true \
@@ -143,6 +143,15 @@ RUN ( \
     && pyenv install 3.6.5 \
     && pyenv shell 3.6.5 \
     && pip install pipenv \
+  ) \
+  && ( \
+    git clone --single-branch --depth 1 https://github.com/rbenv/rbenv.git /root/.rbenv \
+    && (cd ~/.rbenv && src/configure && make -C src) \
+    && git clone --single-branch --depth 1 https://github.com/sstephenson/ruby-build.git /root/.rbenv/plugins/ruby-build \
+    && rbenv install 2.6.5 && rbenv global 2.6.5 \
+    && rbenv rehash \
+    && echo 'install: --no-document' >> /root/.gemrc \
+    && echo 'update: --no-document' >> /root/.gemrc \
   ) \
   && ( \
     cd $(mktemp -d) \
@@ -196,10 +205,8 @@ RUN ( \
     && ssh-keyscan -H bitbucket.org >> ~/.ssh/known_hosts \
     && git config --global user.email "you@example.com" \
     && git config --global user.name "Your Name" \
+    && git config --global core.longpaths true \
   ) \
-  && echo 'install: --no-ri --no-rdoc' >> /root/.gemrc \
-  && echo 'update: --no-ri --no-rdoc' >> /root/.gemrc \
-  && gem install bundler \
   && ( \
     echo 'local all postgres trust' > /etc/postgresql/10/main/pg_hba.conf \
     && echo "fix postgresql and docker bug by https://gitter.im/bgruening/docker-galaxy-stable/archives/2017/03/09" \
