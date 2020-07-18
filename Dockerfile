@@ -45,7 +45,6 @@ RUN ( \
     gnuplot \
     gsfonts \
     imagemagick \
-    libarmadillo9 \
     libflac-dev \
     libgflags-dev \
     libmagick++-dev \
